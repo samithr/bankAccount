@@ -1,3 +1,7 @@
 .vs
-/BankAccountInterest/bin
-/BankAccountInterest/obj
+BankAccountInterest/bin
+BankAccountInterest/obj
+*.suo
+*.user
+bin
+obj
