@@ -68,7 +68,7 @@ namespace BankAccountInterest.Service
             accountService.UpdateAccount(accountNumber, amount, transactionType);
         }
 
-        private IEnumerable<AccountTransaction> GetAllTransactions()
+        public IEnumerable<AccountTransaction> GetAllTransactions()
         {
             try
             {
@@ -89,6 +89,13 @@ namespace BankAccountInterest.Service
             {
                 throw;
             }
+        }
+
+        public List<AccountTransaction> GetTransactionByAccountAndDate(string accountNumber, string date)
+        {
+            var allTransactions = GetAllTransactions();
+            var dateRange = date.Substring(0,6);
+            return allTransactions.Where(transaction => transaction.AccountNumber.Equals(accountNumber) && transaction.Date.StartsWith(dateRange)).ToList();
         }
 
         private string UpdateTransactions(string date, string accountNumber, decimal amount, string transactionType)

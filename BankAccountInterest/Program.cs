@@ -74,8 +74,8 @@ namespace BankAccountInterest
             }
             else
             {
-                var transactionService = new InterestRuleService();
-                var response = transactionService.ProcessInteresRule(ruleInputSplit[0], ruleInputSplit[1], ruleInputSplit[2]);
+                var ruleDefiningService = new InterestRuleService();
+                var response = ruleDefiningService.ProcessInteresRule(ruleInputSplit[0], ruleInputSplit[1], ruleInputSplit[2]);
                 Console.WriteLine(response);
                 Console.WriteLine("Is there anything else you'd like to do?");
                 MainMenu();
@@ -84,7 +84,23 @@ namespace BankAccountInterest
 
         static void ProcessPrintingStatement()
         {
-
+            Console.WriteLine("Please enter account and month to generate the statement <Account> <Year><Month>\r\n(or enter blank to go back to main menu):");
+            var printInput = Console.ReadLine();
+            var printInputSplit = printInput.Split(" ");
+            Console.WriteLine();
+            if (string.IsNullOrEmpty(printInput) || printInputSplit.Length != 2)
+            {
+                Console.WriteLine($"Invalid input! : {printInput}");
+                MainMenu();
+            }
+            else
+            {
+                var printingService = new PrintingService();
+                var response = printingService.ProcessPrintingStatement(printInputSplit[0], printInputSplit[1]);
+                Console.WriteLine(response);
+                Console.WriteLine("Is there anything else you'd like to do?");
+                MainMenu();
+            }
         }
     }
 }

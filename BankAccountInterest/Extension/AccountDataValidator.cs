@@ -36,5 +36,11 @@ namespace BankAccountInterest.Extension
         {
             return string.IsNullOrEmpty(sampleString);
         }
+
+        public static bool ValidateDateUpteMonth(string dateString)
+        {
+            var date = DateTime.ParseExact(dateString, "yyyyMM", CultureInfo.InvariantCulture);
+            return date.ToString("yyyyMM").Equals(dateString);
+        }
     }
 }
