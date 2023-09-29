@@ -13,7 +13,7 @@ namespace BankAccountInterest.Service
     public class TransactionService
     {
         // Better to move away from the source code
-        const string accountTransactionFile = @"Data\transactions.json";
+        const string accountTransactionFile = "..//..//.//..//Data\\transactions.json";
 
         public string PerformTransaction(string dateString, string accountNumber, string transactionType, string amountString)
         {
@@ -108,10 +108,11 @@ namespace BankAccountInterest.Service
                     Type = transactionType[0],
                     TransactionId = transactionId
                 };
-                allTransactions.Append(newTransaction);
-                var newTransactionsList = JsonConvert.SerializeObject(allTransactions, Formatting.Indented);
+                var newTransactions = allTransactions.ToList();
+                newTransactions.Add(newTransaction);
+                var newTransactionsList = JsonConvert.SerializeObject(newTransactions, Formatting.Indented);
                 File.WriteAllText(accountTransactionFile, newTransactionsList);
-                return TransactionHistory(accountNumber, allTransactions);
+                return TransactionHistory(accountNumber, newTransactions);
             }
             catch (Exception)
             {

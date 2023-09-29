@@ -49,6 +49,7 @@ namespace BankAccountInterest
             if (string.IsNullOrEmpty(transactionInput) || transactionInputSplit.Length != 4)
             {
                 Console.WriteLine($"Invalid input! : {transactionInput}");
+                MainMenu();
             }
             else
             {
@@ -62,7 +63,21 @@ namespace BankAccountInterest
 
         static void ProcessDefiningInterestRule()
         {
-
+            Console.WriteLine("Please enter interest rules details in <Date> <RuleId> <Rate in %> format \r\n(or enter blank to go back to main menu):");
+            var transactionInput = Console.ReadLine();
+            var transactionInputSplit = transactionInput.Split(" ");
+            Console.WriteLine();
+            if (string.IsNullOrEmpty(transactionInput) || transactionInputSplit.Length != 3)
+            {
+                Console.WriteLine($"Invalid input! : {transactionInput}");
+                MainMenu();
+            }
+            else
+            {
+                var transactionService = new InterestRuleService();
+                Console.WriteLine("Is there anything else you'd like to do?");
+                MainMenu();
+            }
         }
 
         static void ProcessPrintingStatement()

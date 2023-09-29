@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BankAccountInterest.Model
 {
-    internal class InterestRule
+    public class InterestRule
     {
     }
 }
