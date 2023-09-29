@@ -1,4 +1,4 @@
-/.vs
-/.git
-/BankAccountInterest/bin
-/BankAccountInterest/obj
+.vs
+.git
+BankAccountInterest/bin
+BankAccountInterest/obj
