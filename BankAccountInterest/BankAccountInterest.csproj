@@ -17,6 +17,9 @@
     <None Update="Data\accounts.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\rules.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\transactions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

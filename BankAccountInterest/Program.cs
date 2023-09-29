@@ -64,17 +64,19 @@ namespace BankAccountInterest
         static void ProcessDefiningInterestRule()
         {
             Console.WriteLine("Please enter interest rules details in <Date> <RuleId> <Rate in %> format \r\n(or enter blank to go back to main menu):");
-            var transactionInput = Console.ReadLine();
-            var transactionInputSplit = transactionInput.Split(" ");
+            var ruleInput = Console.ReadLine();
+            var ruleInputSplit = ruleInput.Split(" ");
             Console.WriteLine();
-            if (string.IsNullOrEmpty(transactionInput) || transactionInputSplit.Length != 3)
+            if (string.IsNullOrEmpty(ruleInput) || ruleInputSplit.Length != 3)
             {
-                Console.WriteLine($"Invalid input! : {transactionInput}");
+                Console.WriteLine($"Invalid input! : {ruleInput}");
                 MainMenu();
             }
             else
             {
                 var transactionService = new InterestRuleService();
+                var response = transactionService.ProcessInteresRule(ruleInputSplit[0], ruleInputSplit[1], ruleInputSplit[2]);
+                Console.WriteLine(response);
                 Console.WriteLine("Is there anything else you'd like to do?");
                 MainMenu();
             }

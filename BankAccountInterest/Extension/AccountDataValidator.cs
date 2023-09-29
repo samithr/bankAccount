@@ -14,7 +14,7 @@ namespace BankAccountInterest.Extension
 
         public static bool ValidateAccountNumber(string accountNumber)
         {
-            return !string.IsNullOrEmpty(accountNumber);
+            return !InvalidString(accountNumber);
         }
 
         public static bool ValidateTransactionType(string transactionType)
@@ -22,10 +22,19 @@ namespace BankAccountInterest.Extension
             return transactionType.Equals(ExpetingInput.D.ToString()) || transactionType.Equals(ExpetingInput.W.ToString());
         }
 
-        public static bool ValidateTransactionAmount(string amountString)
+        public static bool ValidateDecimalAmount(string amountString)
         {
             double.TryParse(amountString, out double amount);
             return amount > 0;
+        }
+        public static bool ValidateRule(string ruleId)
+        {
+            return !InvalidString(ruleId);
+        }
+
+        private static bool InvalidString(string sampleString)
+        {
+            return string.IsNullOrEmpty(sampleString);
         }
     }
 }

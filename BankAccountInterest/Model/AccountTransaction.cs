@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BankAccountInterest.Model
+﻿namespace BankAccountInterest.Model
 {
     public class AccountTransaction
     {

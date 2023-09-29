@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankAccountInterest.Model
+﻿namespace BankAccountInterest.Model
 {
     public class InterestRule
     {
+        public string Date { get; set; }
+        public string RuleId { get; set; }
+        public decimal Rate { get; set; }
     }
 }

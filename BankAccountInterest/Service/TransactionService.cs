@@ -12,8 +12,9 @@ namespace BankAccountInterest.Service
 {
     public class TransactionService
     {
-        // Better to move away from the source code
-        const string accountTransactionFile = "..//..//.//..//Data\\transactions.json";
+        // Better to move away from the source code        
+        const string transactionFile = @"Data\transactions.json";
+        const string transactionWriteFile = "..//..//.//..//Data\\transactions.json";
 
         public string PerformTransaction(string dateString, string accountNumber, string transactionType, string amountString)
         {
@@ -43,7 +44,7 @@ namespace BankAccountInterest.Service
                 {
                     if (AccountDataValidator.ValidateTransactionType(transactionType))
                     {
-                        return AccountDataValidator.ValidateTransactionAmount(amountString);
+                        return AccountDataValidator.ValidateDecimalAmount(amountString);
                     }
                 }
             }
@@ -71,16 +72,16 @@ namespace BankAccountInterest.Service
         {
             try
             {
-                IEnumerable<AccountTransaction> accountItems = null;
-                if (File.Exists(accountTransactionFile))
+                IEnumerable<AccountTransaction> transactionItems = null;
+                if (File.Exists(transactionFile))
                 {
-                    using StreamReader r = new StreamReader(accountTransactionFile);
+                    using StreamReader r = new StreamReader(transactionFile);
                     string json = r.ReadToEnd();
-                    accountItems = JsonConvert.DeserializeObject<IEnumerable<AccountTransaction>>(json).ToList();
+                    transactionItems = JsonConvert.DeserializeObject<IEnumerable<AccountTransaction>>(json).ToList();
                 }
-                if (accountItems.Any())
+                if (transactionItems.Any())
                 {
-                    return accountItems;
+                    return transactionItems;
                 }
                 return null;
             }
@@ -111,7 +112,7 @@ namespace BankAccountInterest.Service
                 var newTransactions = allTransactions.ToList();
                 newTransactions.Add(newTransaction);
                 var newTransactionsList = JsonConvert.SerializeObject(newTransactions, Formatting.Indented);
-                File.WriteAllText(accountTransactionFile, newTransactionsList);
+                File.WriteAllText(transactionWriteFile, newTransactionsList);
                 return TransactionHistory(accountNumber, newTransactions);
             }
             catch (Exception)
