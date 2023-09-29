@@ -1,0 +1,4 @@
+/.vs
+/.git
+/BankAccountInterest/bin
+/BankAccountInterest/obj

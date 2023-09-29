@@ -1,0 +1,23 @@
+[
+  {
+    "accountNumber": "AC001",
+    "date": "20230505",
+    "transactionId": "20230505-01",
+    "type": "D",
+    "amount": 100.00
+  },
+  {
+    "accountNumber": "AC001",
+    "date": "20230505",
+    "transactionId": "20230505-01",
+    "type": "W",
+    "amount": 60.00
+  },
+  {
+    "accountNumber": "AC002",
+    "date": "20230506",
+    "transactionId": "20230505-01",
+    "type": "D",
+    "amount": 100.00
+  }
+]
