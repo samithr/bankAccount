@@ -19,7 +19,7 @@ namespace BankAccountInterest.Extension
 
         public static bool ValidateTransactionType(string transactionType)
         {
-            return transactionType.Equals(ExpetingInput.D.ToString()) || transactionType.Equals(ExpetingInput.W.ToString());
+            return transactionType.Equals(ExpectingInput.D.ToString()) || transactionType.Equals(ExpectingInput.W.ToString());
         }
 
         public static bool ValidateDecimalAmount(string amountString)

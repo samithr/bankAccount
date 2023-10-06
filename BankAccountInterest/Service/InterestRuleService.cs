@@ -25,6 +25,42 @@ namespace BankAccountInterest.Service
             return "Invalid input data!";
         }
 
+        public string ProcessRule(string dateString, string ruleString, decimal rate)
+        {
+            try
+            {
+                if (rate > 0 && rate < 100)
+                {
+                    var allRuleItems = GetAllRules().ToList();
+                    var rule = allRuleItems.FirstOrDefault(rule => rule.Date.Equals(dateString) && rule.RuleId.Equals(ruleString));
+                    if (rule != null)
+                    {
+                        rule.Rate = rate;
+                    }
+                    else
+                    {
+                        var newRule = new InterestRule()
+                        {
+                            Date = dateString,
+                            RuleId = ruleString,
+                            Rate = rate
+                        };
+                        allRuleItems.Add(newRule);
+                    }
+                    var updatedRuleList = JsonConvert.SerializeObject(allRuleItems, Formatting.Indented);
+                    File.WriteAllText(ruleWriteFilePath, updatedRuleList);
+                    return AllRules(allRuleItems);
+                }
+                return "Invalid interest rate";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #region Private Methods
+
         private bool ValidateData(string dateString, string ruleString, string rateString)
         {
             if (AccountDataValidator.ValidateDate(dateString))
@@ -60,36 +96,6 @@ namespace BankAccountInterest.Service
             }
         }
 
-        public string ProcessRule(string dateString, string ruleString, decimal rate)
-        {
-            try
-            {
-                var allRuleItems = GetAllRules().ToList();
-                var rule = allRuleItems.FirstOrDefault(rule => rule.Date.Equals(dateString) && rule.RuleId.Equals(ruleString));
-                if (rule != null && rate > 0)
-                {
-                    rule.Rate = rate;
-                }
-                else
-                {
-                    var newRule = new InterestRule()
-                    {
-                        Date = dateString,
-                        RuleId = ruleString,
-                        Rate = rate
-                    };
-                    allRuleItems.Add(newRule);
-                }
-                var updatedRuleList = JsonConvert.SerializeObject(allRuleItems, Formatting.Indented);
-                File.WriteAllText(ruleWriteFilePath, updatedRuleList);
-                return AllRules(allRuleItems);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         private string AllRules(List<InterestRule> allRules)
         {
             var response = new StringBuilder();
@@ -103,5 +109,6 @@ namespace BankAccountInterest.Service
             return response.ToString();
         }
 
+        #endregion
     }
 }

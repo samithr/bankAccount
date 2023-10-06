@@ -24,7 +24,7 @@ namespace BankAccountInterest.Service
                 var account = CheckAccount(accountNumber, transactionType, amount);
                 if (account != null)
                 {
-                    if (transactionType.Equals(ExpetingInput.D.ToString()) || (transactionType.Equals(ExpetingInput.W.ToString()) && ValidateAccountBalance(account.Balance, amount)))
+                    if (transactionType.Equals(ExpectingInput.D.ToString()) || (transactionType.Equals(ExpectingInput.W.ToString()) && ValidateAccountBalance(account.Balance, amount)))
                     {
                         UpdateAccount(accountNumber, amount, transactionType);
                         return UpdateTransactions(dateString, accountNumber, amount, transactionType);
@@ -36,36 +36,11 @@ namespace BankAccountInterest.Service
             return "Invalid input data!";
         }
 
-        private bool ValidateData(string dateString, string accountNumber, string transactionType, string amountString)
+        public List<AccountTransaction> GetTransactionByAccountAndDate(string accountNumber, string date)
         {
-            if (AccountDataValidator.ValidateDate(dateString))
-            {
-                if (AccountDataValidator.ValidateAccountNumber(accountNumber))
-                {
-                    if (AccountDataValidator.ValidateTransactionType(transactionType))
-                    {
-                        return AccountDataValidator.ValidateDecimalAmount(amountString);
-                    }
-                }
-            }
-            return false;
-        }
-
-        private Account CheckAccount(string accountNumber, string transactionType, decimal amount)
-        {
-            var accountService = new AccountService();
-            return accountService.GetAccount(accountNumber, transactionType, amount);
-        }
-
-        private bool ValidateAccountBalance(decimal accountBalance, decimal amount)
-        {
-            return accountBalance - amount > 0;
-        }
-
-        private void UpdateAccount(string accountNumber, decimal amount, string transactionType)
-        {
-            var accountService = new AccountService();
-            accountService.UpdateAccount(accountNumber, amount, transactionType);
+            var allTransactions = GetAllTransactions();
+            var dateRange = date[..6];
+            return allTransactions.Where(transaction => transaction.AccountNumber.Equals(accountNumber) && transaction.Date.StartsWith(dateRange)).ToList();
         }
 
         public IEnumerable<AccountTransaction> GetAllTransactions()
@@ -91,11 +66,38 @@ namespace BankAccountInterest.Service
             }
         }
 
-        public List<AccountTransaction> GetTransactionByAccountAndDate(string accountNumber, string date)
+        #region Private Methods
+
+        private bool ValidateData(string dateString, string accountNumber, string transactionType, string amountString)
         {
-            var allTransactions = GetAllTransactions();
-            var dateRange = date.Substring(0,6);
-            return allTransactions.Where(transaction => transaction.AccountNumber.Equals(accountNumber) && transaction.Date.StartsWith(dateRange)).ToList();
+            if (AccountDataValidator.ValidateDate(dateString))
+            {
+                if (AccountDataValidator.ValidateAccountNumber(accountNumber))
+                {
+                    if (AccountDataValidator.ValidateTransactionType(transactionType))
+                    {
+                        return AccountDataValidator.ValidateDecimalAmount(amountString);
+                    }
+                }
+            }
+            return false;
+        }
+
+        private Account CheckAccount(string accountNumber, string transactionType, decimal amount)
+        {
+            var accountService = new AccountService();
+            return accountService.GetOrCreateAccount(accountNumber, transactionType, amount);
+        }
+
+        private bool ValidateAccountBalance(decimal accountBalance, decimal amount)
+        {
+            return accountBalance - amount > 0;
+        }
+
+        private void UpdateAccount(string accountNumber, decimal amount, string transactionType)
+        {
+            var accountService = new AccountService();
+            accountService.UpdateAccount(accountNumber, amount, transactionType);
         }
 
         private string UpdateTransactions(string date, string accountNumber, decimal amount, string transactionType)
@@ -150,5 +152,7 @@ namespace BankAccountInterest.Service
             }
             return response.ToString();
         }
+
+        #endregion
     }
 }

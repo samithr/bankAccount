@@ -1,6 +1,6 @@
 ﻿namespace BankAccountInterest.Enum
 {
-    public enum ExpetingInput
+    public enum ExpectingInput
     {
         T,
         I,

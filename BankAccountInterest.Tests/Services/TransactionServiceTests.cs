@@ -10,8 +10,6 @@ namespace BankAccountInterest.Tests.Services
         {
             // Arrange
             var transactionService = new TransactionService();
-            
-            
             var dateString = "20230605";
             var accountNumber = "AC001";
             var transactionType = "D";
@@ -57,6 +55,36 @@ namespace BankAccountInterest.Tests.Services
             // Assert
             Assert.NotNull(result);
             Assert.NotEmpty(result);
+        }
+
+        [Fact]
+        public void GetTransactionByAccountAndDate_WithInvalidData_ShouldReturnEmptyList()
+        {
+            // Arrange
+            var transactionService = new TransactionService();
+            var accountNumber = "ACD001";
+            var date = "20230605";
+
+            // Act
+            var result = transactionService.GetTransactionByAccountAndDate(accountNumber, date);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void GetAllTransaction_ShouldReturnTransactionList()
+        {
+            // Arrange
+            var transactionService = new TransactionService();
+
+            // Act
+            var result = transactionService.GetAllTransactions();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.True(result.Any());
         }
     }
 }

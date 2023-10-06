@@ -18,19 +18,19 @@ namespace BankAccountInterest
             var userInput = Console.ReadKey();
             var input = userInput.Key.ToString();
             Console.WriteLine();
-            if (input.Equals(ExpetingInput.T.ToString()))
+            if (input.Equals(ExpectingInput.T.ToString()))
             {
                 ProcessTransaction();
             }
-            else if (input.Equals(ExpetingInput.I.ToString()))
+            else if (input.Equals(ExpectingInput.I.ToString()))
             {
                 ProcessDefiningInterestRule();
             }
-            else if (input.Equals(ExpetingInput.P.ToString()))
+            else if (input.Equals(ExpectingInput.P.ToString()))
             {
                 ProcessPrintingStatement();
             }
-            else if (input.Equals(ExpetingInput.Q.ToString()))
+            else if (input.Equals(ExpectingInput.Q.ToString()))
             {
                 Console.WriteLine("Thank you for banking with AwesomeGIC Bank.\r\nHave a nice day!");
             }

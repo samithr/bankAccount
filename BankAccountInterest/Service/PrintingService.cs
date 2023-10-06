@@ -17,6 +17,8 @@ namespace BankAccountInterest.Service
             return "No transactions found";
         }
 
+        #region Private Methods
+
         private bool ValidateData(string accountNumber, string dateString)
         {
             if (AccountDataValidator.ValidateDateUpteMonth(dateString))
@@ -46,5 +48,7 @@ namespace BankAccountInterest.Service
             }
             return response.ToString();
         }
+
+        #endregion
     }
 }
