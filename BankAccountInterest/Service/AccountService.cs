@@ -14,6 +14,16 @@ namespace BankAccountInterest.Service
         const string accountFile = @"Data\accounts.json";
         const string accountWriteFilePath = "..//..//.//..//Data\\accounts.json";
 
+        //public string accountFile { get; set; }
+        //public string accountWriteFilePath { get; set; }
+
+        //public AccountService(string accountFileName = accountFileName,
+        //    string AccountFilePath = accountWriteFilePathName)
+        //{
+        //    this.accountFile = accountFileName;
+        //    this.accountWriteFilePath = AccountFilePath;
+        //}
+
         public Account GetAccount(string accountNumber, string transactionType, decimal amount)
         {
             try

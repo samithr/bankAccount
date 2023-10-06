@@ -33,5 +33,12 @@
     "TransactionId": "20230926-02",
     "Type": "W",
     "Amount": 500.00
+  },
+  {
+    "AccountNumber": "AC003",
+    "Date": "20230926",
+    "TransactionId": "20230926-03",
+    "Type": "D",
+    "Amount": 500.00
   }
 ]

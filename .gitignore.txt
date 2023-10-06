@@ -1,7 +1,0 @@
-.vs
-BankAccountInterest/bin
-BankAccountInterest/obj
-*.suo
-*.user
-bin
-obj

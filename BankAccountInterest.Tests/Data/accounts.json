@@ -1,7 +1,7 @@
 [
   {
     "AccountNumber": "AC001",
-    "Balance": 40.00
+    "Balance": 640.00
   },
   {
     "AccountNumber": "AC002",
@@ -9,6 +9,6 @@
   },
   {
     "AccountNumber": "AC003",
-    "Balance": 3300.00
+    "Balance": 2800.00
   }
 ]
