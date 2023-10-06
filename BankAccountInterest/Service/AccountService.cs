@@ -25,7 +25,7 @@ namespace BankAccountInterest.Service
                 else
                 {
                     var accountItems = GetAllAccountFromData();
-                    var account = GetAllAccountFromData().FirstOrDefault(account => account.AccountNumber.Equals(accountNumber));
+                    var account = accountItems.FirstOrDefault(account => account.AccountNumber.Equals(accountNumber));
                     if (account != null)
                     {
                         return account;
